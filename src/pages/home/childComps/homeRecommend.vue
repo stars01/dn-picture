@@ -1,7 +1,7 @@
 <template>
     <scroll-view scroll-y
     @scrolltolower='handleToLower'
-    class="recommend_view"
+    class="recommend_scroll_view"
     v-if="recommends.length>0">
         <!-- 上方推荐4张图片 -->
         <view class="recommend_wrap">
@@ -29,21 +29,21 @@
                 </view>
             </view>
         </view>
-            <!-- 热门 开始 -->
-            <view class="hots_wrap">
-                <view class="hots_title">
-                    <text> 热门 </text>
-                </view>
-                <view class="hots_content">
-                    <view
-                    class="hot_item"
-                    v-for="(item,index) in hots"
-                    :key="item.id">
-                            <image mode="widthFix"
-                            :src="item.thumb"/>
-                    </view>
+        <!-- 热门 开始 -->
+        <view class="hots_wrap">
+            <view class="hots_title">
+                <text> 热门 </text>
+            </view>
+            <view class="hots_content">
+                <view
+                class="hot_item"
+                v-for="(item,index) in hots"
+                :key="item.id">
+                        <image mode="widthFix"
+                        :src="item.thumb"/>
                 </view>
             </view>
+        </view>
     </scroll-view>
 </template>
 
@@ -108,7 +108,6 @@ export default {
             if(this.hasMore) {
                 this.params.skip += this.params.limit
                 this.getList()
-                console.log("触底")
             }else{
                 uni.showToast({
                     title: "没有更多了",
@@ -121,7 +120,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.recommend_view {
+.recommend_scroll_view {
   // 屏幕的高度 -  头部标题的高度
   height: calc(100vh - 36px);
 }
