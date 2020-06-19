@@ -7,7 +7,9 @@
 <script>
 
 export default {
-    
+    mounted() {
+        uni.setNavigationBarTitle({title: "专辑"})
+    }
 }
 </script>
 
