@@ -6,8 +6,9 @@
         <!-- 上方推荐4张图片 -->
         <view class="recommend_wrap">
             <navigator 
-            v-for="(item, index) in recommends" :key="index"
-            class="recommend_item">
+            v-for="item in recommends" :key="item.id"
+            class="recommend_item"
+            :url="`/pages/album/index?id=${item.target}`">
                 <image mode="widthFix" :src="item.thumb" />
             </navigator>
         </view>
@@ -23,9 +24,11 @@
             </view>
             <view class="months_content">
                 <view class="months_item" 
-                v-for="(item, index) in months.items" :key="index">
-                    <image mode="aspectFill"
-                    :src="item.img+item.rule.replace('$<Height>',360)" />
+                v-for="(item, index) in months.items" :key="item.id">
+                    <go-detail :list="months.items" :index="index">
+                        <image mode="aspectFill"
+                        :src="item.img+item.rule.replace('$<Height>',360)" />
+                    </go-detail>
                 </view>
             </view>
         </view>
@@ -39,8 +42,10 @@
                 class="hot_item"
                 v-for="(item,index) in hots"
                 :key="item.id">
+                    <go-detail :list="hots" :index="index">
                         <image mode="widthFix"
                         :src="item.thumb"/>
+                    </go-detail>
                 </view>
             </view>
         </view>
@@ -49,8 +54,11 @@
 
 <script>
 import moment from '../../../styles/moment'
+import GoDetail from '@/components/goDetail/GoDetail'
+
 
 export default {
+    components: {GoDetail},
     data() {
         return {
             recommends: [],
@@ -80,7 +88,7 @@ export default {
                 data: this.params
             }).then(res => {
                 //判断还有没有数据
-                if(res.res.vertical === 0) {
+                if(res.res.vertical.length === 0) {
                     this.hasMore = false
                     uni.showToast({
                         title: "没有更多了",

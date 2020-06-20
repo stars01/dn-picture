@@ -8,16 +8,16 @@
             indicator-dots
             circular
             autoplay>
-                <swiper-item v-for="(item, index) in banner" :key="index">
-                    <image :src="item.thumb" />
+                <swiper-item v-for="item in banner" :key="item.id">
+                    <image :src="item.thumb"></image>
                 </swiper-item>
             </swiper>
         </view>
-        <!-- 列表 开始 -->
+        <!-- 列表 -->
         <view class="album_list">
             <navigator class="album_item"
             v-for="item in album" :key="item.id"
-            url='pages/album/index'>
+            :url="`/pages/album/index?id=${item.id}`">
                 <view class="album_img">
                     <image
                         mode="aspectFill"
@@ -86,7 +86,7 @@ export default {
             if(this.hasMore) {
                 this.params.skip += this.params.limit
                 this.getList()
-                console.log("触底")
+                // console.log("触底")
             }else{
                 uni.showToast({
                     title: "没有更多了",
