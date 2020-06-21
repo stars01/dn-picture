@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import moment from '../../../styles/moment'
+import moment from 'moment'
 import GoDetail from '@/components/goDetail/GoDetail'
 
 

@@ -53,7 +53,7 @@ export default {
         }
     },
     onLoad(options) {
-        console.log(options)
+        // console.log(options)
         this.id = options.id
         this.getList();
     },
@@ -75,7 +75,7 @@ export default {
                 url:`http://157.122.54.189:9088/image/v1/wallpaper/album/${this.id}/wallpaper`,
                 data: this.params
             }).then(result => {
-                console.log(result);
+                // console.log(result);
                 if(Object.keys(this.album).length === 0) {
                     this.album = result.res.album
                 }
