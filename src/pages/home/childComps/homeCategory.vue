@@ -1,11 +1,12 @@
 <template>
-    <view class="home_category">
+    <scroll-view scroll-y enable-flex
+    class="home_category">
         <navigator class="category_item" v-for="(item, index) in category" :key="item.id"
         :url="`/pages/imgCategory/index?id=${item.id}`">
             <image :src="item.cover" mode="aspectFill" />
             <view class="name">{{item.name}}</view>
         </navigator>
-    </view>
+    </scroll-view>
 </template>
 
 <script>
@@ -25,7 +26,7 @@ export default {
             this.request({
                 url: "http://157.122.54.189:9088/image/v1/vertical/category"
             }).then(reslut => {
-                console.log(reslut);
+                // console.log(reslut);
                 this.category = reslut.res.category;
             });
         }
@@ -35,6 +36,7 @@ export default {
 
 <style scoped lang='scss'>
 .home_category {
+    height: calc(100vh - 36px);
     display: flex;
     flex-wrap: wrap;
     .category_item {
