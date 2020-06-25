@@ -169,8 +169,9 @@ export default {
             })
 
             // 1 将远程文件下载到小程序的内存中 tempFilePath
-            const result1 = await uni.downloadFile({ url: this.imgDetail.img });
-            const { tempFilePath } = result1[1];
+            // const result1 = await uni.downloadFile({ url: this.imgDetail.img });
+            // const { tempFilePath } = result1[1];
+            const { tempFilePath } = (await uni.downloadFile({ url: this.imgDetail.img }))[1];
 
             //  2 将小程序内存中的临时文件下载到本地上
             const result2 = await uni.saveImageToPhotosAlbum({ filePath: tempFilePath });

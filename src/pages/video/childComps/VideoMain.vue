@@ -4,7 +4,8 @@
     @scrolltolower="getList"
     class="main_content">
         <view class="main_item" 
-        v-for="(item,index) in mainList" :key="item.id">
+        v-for="(item,index) in mainList" :key="item.id"
+        @click="toVideoDetail(item)">
             <image mode="widthFix" :src="item.img" />
         </view>
     </scroll-view>
@@ -49,6 +50,14 @@ export default {
                 this.mainList = [...this.mainList, ...result.res.videowp];
                 this.urlObj.params.skip += 30;
             });
+        },
+        toVideoDetail(item) {
+            //储存点击的视频对象数据
+            getApp().globalData.video = item
+            //跳转页面
+            uni.navigateTo({
+                url: "/pages/videoDetail/index"
+            })
         }
     }
 }
